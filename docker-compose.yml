@@ -1,0 +1,25 @@
+services:
+  yolov8-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yolov8-streamlit-gradio
+    ports:
+      - "8501:8501"  # Streamlit
+      - "7860:7860"  # Gradio
+    volumes:
+      - ./last.pt:/app/model.pt:ro  # Mount model as read-only
+      - ./config.yaml:/app/config.yaml:ro
+    # Camera access - For macOS/Windows, Docker Desktop handles camera permissions
+    # For Linux, uncomment the devices section:
+    # devices:
+    #   - /dev/video0:/dev/video0
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - GRADIO_SERVER_PORT=7860
+      - GRADIO_SERVER_ADDRESS=0.0.0.0
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+

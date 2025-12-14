@@ -1,0 +1,24 @@
+# YOLOv8 Model Configuration
+model:
+  path: "model.pt"
+  device: "cpu"  # Options: "cpu", "cuda", "mps" (for Apple Silicon). Note: MPS not available in Docker
+  conf_threshold: 0.25
+  iou_threshold: 0.45
+  max_det: 300
+
+# Camera Configuration
+camera:
+  device_id: 0  # Default camera device
+  width: 640
+  height: 480
+  fps: 30
+
+# Application Settings
+app:
+  streamlit_port: 8501
+  gradio_port: 7860
+  show_labels: true
+  show_conf: true
+  show_boxes: true
+  line_width: 2
+
